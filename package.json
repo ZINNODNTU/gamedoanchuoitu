@@ -1,0 +1,22 @@
+{
+  "name": "gameboard-word-chain",
+  "version": "1.0.0",
+  "description": "1vs1 Word Chain Guessing Game",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "keywords": [
+    "game",
+    "socket.io",
+    "realtime"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.22.2",
+    "node-fetch": "^3.3.2",
+    "socket.io": "^4.8.3"
+  }
+}
