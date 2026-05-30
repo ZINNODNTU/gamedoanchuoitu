@@ -31,6 +31,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 #app {
@@ -629,55 +630,295 @@ h4 {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  #app {
+    max-width: 100%;
+  }
+
   .container {
-    padding: 25px;
+    padding: 20px;
+    box-shadow: 
+      0 10px 30px var(--card-shadow),
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      0 0 0 4px var(--wood-dark),
+      0 0 0 6px var(--accent-primary);
+    border: 2px solid var(--wood-light);
+  }
+
+  .container::before {
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
   }
 
   h1 {
-    font-size: 26px;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+  }
+
+  h2 {
+    font-size: 18px;
+    word-wrap: break-word;
+  }
+
+  h3 {
+    font-size: 16px;
+    flex-wrap: wrap;
+  }
+
+  h4 {
+    font-size: 15px;
   }
 
   .btn {
-    padding: 14px 20px;
+    padding: 14px 18px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Fix guess input - chuyển dọc trên mobile */
+  .guess-input {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .guess-input input {
+    width: 100%;
     font-size: 16px;
   }
 
+  .guess-input button {
+    width: 100%;
+    padding: 14px 18px;
+  }
+
+  /* Fix word tiles */
   .word-item {
+    font-size: 17px;
+    padding: 12px 14px;
+    letter-spacing: 0.5px;
+    word-wrap: break-word;
+  }
+
+  .word-item.masked {
+    font-size: 20px;
+    letter-spacing: 3px;
+  }
+
+  /* Fix game header */
+  .game-header h2 {
     font-size: 18px;
+    padding: 12px 16px;
+    letter-spacing: 1px;
+    word-wrap: break-word;
+  }
+
+  /* Fix turn indicator */
+  .turn-indicator {
     padding: 12px 16px;
   }
 
+  .turn-indicator p {
+    font-size: 16px;
+    word-wrap: break-word;
+  }
+
+  .turn-indicator strong {
+    font-size: 18px;
+  }
+
+  /* Fix suggestions box */
   .suggestions-box {
-    max-height: 180px;
+    max-height: 200px;
+    max-width: calc(100vw - 40px);
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
   }
 
   .suggestion-item {
-    padding: 12px 16px;
+    padding: 14px 16px;
     font-size: 16px;
+  }
+
+  /* Fix progress & history */
+  .progress-item {
+    font-size: 15px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .history-item {
+    font-size: 15px;
+    word-wrap: break-word;
+  }
+
+  /* Fix players list */
+  .players-list li {
+    font-size: 16px;
+    word-wrap: break-word;
+  }
+
+  /* Fix winner announcement */
+  .winner-announcement {
+    padding: 25px 20px;
+  }
+
+  .winner-announcement h2 {
+    font-size: 22px;
+    word-wrap: break-word;
   }
 }
 
 @media (max-width: 480px) {
+  body {
+    padding: 8px;
+  }
+
   .container {
-    padding: 20px;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 
+      0 8px 20px var(--card-shadow),
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      0 0 0 3px var(--wood-dark),
+      0 0 0 5px var(--accent-primary);
   }
 
   h1 {
-    font-size: 22px;
-    letter-spacing: 1px;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  h3 {
+    font-size: 15px;
+  }
+
+  h4 {
+    font-size: 14px;
   }
 
   .btn {
-    padding: 12px 18px;
+    padding: 13px 16px;
     font-size: 15px;
+    letter-spacing: 0.3px;
+  }
+
+  .form-group label {
+    font-size: 15px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 15px;
+    padding: 12px 14px;
   }
 
   .word-item {
     font-size: 16px;
+    padding: 10px 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .word-item.masked {
+    font-size: 18px;
+    letter-spacing: 2px;
   }
 
   .game-header h2 {
-    font-size: 20px;
+    font-size: 16px;
+    padding: 10px 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .turn-indicator {
+    padding: 10px 14px;
+  }
+
+  .turn-indicator p {
+    font-size: 15px;
+  }
+
+  .turn-indicator strong {
+    font-size: 16px;
+  }
+
+  .guess-input input {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+
+  .guess-input button {
+    padding: 13px 16px;
+    font-size: 15px;
+  }
+
+  .suggestions-box {
+    max-height: 180px;
+    border-width: 2px;
+  }
+
+  .suggestion-item {
+    padding: 13px 14px;
+    font-size: 15px;
+  }
+
+  .progress-item {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .history-item {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .players-list {
+    padding: 16px;
+  }
+
+  .players-list li {
+    font-size: 15px;
+    padding: 10px 12px;
+  }
+
+  .secret-word-input span {
+    min-width: 30px;
+    font-size: 18px;
+  }
+
+  .secret-word-input input {
+    font-size: 15px;
+    padding: 10px 12px;
+  }
+
+  .winner-announcement {
+    padding: 20px 16px;
+  }
+
+  .winner-announcement h2 {
+    font-size: 19px;
+  }
+
+  .status-message p {
+    font-size: 15px;
+  }
+
+  .word-chain,
+  .progress-section,
+  .history-section {
+    padding: 16px;
   }
 }
 
@@ -685,10 +926,35 @@ h4 {
 @media (hover: none) and (pointer: coarse) {
   .suggestion-item {
     padding: 16px 18px;
-    min-height: 48px;
+    min-height: 50px;
+    font-size: 16px;
   }
 
   .btn {
-    min-height: 52px;
+    min-height: 50px;
+    padding: 15px 20px;
   }
+
+  .guess-input input {
+    min-height: 50px;
+  }
+
+  .form-group input,
+  .form-group select {
+    min-height: 50px;
+  }
+
+  .secret-word-input input {
+    min-height: 48px;
+  }
+}
+
+/* Prevent horizontal scroll on all devices */
+* {
+  max-width: 100%;
+}
+
+html, body {
+  overflow-x: hidden;
+  position: relative;
 }
