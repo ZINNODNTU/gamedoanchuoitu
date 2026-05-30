@@ -93,7 +93,45 @@ document.getElementById('confirmJoinBtn').addEventListener('click', () => {
 function renderWaitingRoom(room) {
   currentRoom = room;
   
-  document.getElementById('displayRoomCode').textContent = room.roomCode;
+  const roomCodeElement = document.getElementById('displayRoomCode');
+  roomCodeElement.textContent = room.roomCode;
+  
+  // Add click to copy functionality
+  roomCodeElement.onclick = () => {
+    navigator.clipboard.writeText(room.roomCode).then(() => {
+      // Visual feedback
+      const originalText = roomCodeElement.textContent;
+      roomCodeElement.textContent = '✓ Đã sao chép!';
+      roomCodeElement.style.color = '#27ae60';
+      
+      setTimeout(() => {
+        roomCodeElement.textContent = originalText;
+        roomCodeElement.style.color = '';
+      }, 1500);
+    }).catch(err => {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = room.roomCode;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        const originalText = roomCodeElement.textContent;
+        roomCodeElement.textContent = '✓ Đã sao chép!';
+        roomCodeElement.style.color = '#27ae60';
+        setTimeout(() => {
+          roomCodeElement.textContent = originalText;
+          roomCodeElement.style.color = '';
+        }, 1500);
+      } catch (err) {
+        alert('Không thể sao chép. Vui lòng copy thủ công: ' + room.roomCode);
+      }
+      document.body.removeChild(textArea);
+    });
+  };
+  
   document.getElementById('displayWordCount').textContent = room.wordCount;
   
   // Render players list
