@@ -210,9 +210,45 @@ async function validateWord(word) {
   }
 }
 
+// Validate chuỗi từ - kiểm tra mọi cặp liền kề có nghĩa
+function validateWordSequence(words) {
+  if (!words || words.length < 2) {
+    return { valid: true }; // Không cần validate nếu chỉ có 1 từ
+  }
+
+  const errors = [];
+
+  for (let i = 0; i < words.length - 1; i++) {
+    const currentWord = words[i].toLowerCase().trim();
+    const nextWord = words[i + 1].toLowerCase().trim();
+    
+    // Kiểm tra xem cặp từ có hợp nghĩa không
+    const validNextWords = wordPairs[currentWord] || [];
+    
+    if (!validNextWords.includes(nextWord)) {
+      errors.push({
+        position: `${i + 1}-${i + 2}`,
+        pair: `"${words[i]}" + "${words[i + 1]}"`,
+        message: `Cặp từ ${i + 1}-${i + 2} không hợp nghĩa: "${words[i]}" + "${words[i + 1]}"`
+      });
+    }
+  }
+
+  if (errors.length > 0) {
+    return {
+      valid: false,
+      errors: errors,
+      message: errors.map(e => e.message).join('\n')
+    };
+  }
+
+  return { valid: true, message: 'Chuỗi từ hợp nghĩa' };
+}
+
 module.exports = {
   isCommonWord,
   getSuggestions,
   validateWord,
+  validateWordSequence,
   commonVietnameseWords
 };

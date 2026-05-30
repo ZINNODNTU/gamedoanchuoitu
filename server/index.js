@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 const path = require('path');
-const { validateWord, getSuggestions } = require('./vietnameseWords');
+const { validateWord, getSuggestions, validateWordSequence } = require('./vietnameseWords');
 
 const app = express();
 const server = http.createServer(app);
@@ -145,7 +145,18 @@ io.on('connection', (socket) => {
       });
     }
 
-    player.secretWords = secretWords.map(w => w.trim());
+    // Validate chuỗi từ - kiểm tra các cặp liền kề có nghĩa
+    const trimmedWords = secretWords.map(w => w.trim());
+    const sequenceValidation = validateWordSequence(trimmedWords);
+    
+    if (!sequenceValidation.valid) {
+      socket.emit('error', { 
+        message: '❌ Chuỗi từ không hợp nghĩa!\n\n' + sequenceValidation.message + '\n\nVui lòng chọn các từ có thể ghép với nhau thành cụm có nghĩa.'
+      });
+      return;
+    }
+
+    player.secretWords = trimmedWords;
     player.ready = true;
 
     // Initialize revealed words (first word is always revealed)
